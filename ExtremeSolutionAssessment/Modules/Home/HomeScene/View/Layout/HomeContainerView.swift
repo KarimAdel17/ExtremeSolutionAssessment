@@ -31,6 +31,7 @@ class HomeContainerView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = #colorLiteral(red: 0.9457526803, green: 0.07907819003, blue: 0.1172275469, alpha: 1)
         button.setImage(UIImage(named: "ic-magnifying-glass"), for: .normal)
+        button.addTarget(self, action: #selector(didTappedSearch), for: .touchUpInside)
         return button
     }()
     
@@ -108,6 +109,12 @@ class HomeContainerView: UIView {
             searchBTN.heightAnchor.constraint(equalToConstant: 20),
             searchBTN.widthAnchor.constraint(equalToConstant: 20)
         ])
+    }
+    
+var onTapSearch: (() -> Void)?
+    
+    @objc func didTappedSearch() {
+        onTapSearch?()
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  HerosTableViewCell.swift
+//  SearchHerosTableViewCell.swift
 //  ExtremeSolutionAssessment
 //
 //  Created by Karim on 13/10/2022.
@@ -7,21 +7,22 @@
 
 import UIKit
 
-class HerosTableViewCell: UITableViewCell {
+class SearchHerosTableViewCell: UITableViewCell {
 
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        view.layer.cornerRadius = 30
+        view.backgroundColor = #colorLiteral(red: 0.1764706075, green: 0.1764706075, blue: 0.1764706075, alpha: 1)
+        view.layer.cornerRadius = 15
         return view
     }()
     
     lazy var heroImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 30
+        image.layer.cornerRadius = 15
         image.clipsToBounds = true
+        image.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         return image
     }()
     
@@ -30,20 +31,8 @@ class HerosTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
-        label.textAlignment = .center
+        label.numberOfLines = 2
         return label
-    }()
-    
-    let blur: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemThinMaterialDark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.alpha = 0.9
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.layer.cornerRadius = 30
-        blurEffectView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        blurEffectView.clipsToBounds = true
-        return blurEffectView
     }()
     
     override func awakeFromNib() {
@@ -78,15 +67,12 @@ class HerosTableViewCell: UITableViewCell {
         setupContainerView()
         setupHeroImage()
         setupHeroName()
-        setupBlur()
     }
 
     private func addSubViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(heroImage)
-        containerView.addSubview(blur)
-        
-        blur.contentView.addSubview(heroName)
+        containerView.addSubview(heroName)
     }
     
     private func setupContainerView() {
@@ -102,26 +88,16 @@ class HerosTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             heroImage.topAnchor.constraint(equalTo: self.containerView.topAnchor),
             heroImage.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
-            heroImage.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
-            heroImage.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
-        ])
-    }
-    
-    private func setupBlur() {
-        NSLayoutConstraint.activate([
-            blur.heightAnchor.constraint(equalToConstant: 40),
-            blur.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
-            blur.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
-            blur.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
+            heroImage.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
+            heroImage.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
     private func setupHeroName() {
         NSLayoutConstraint.activate([
-            heroName.topAnchor.constraint(equalTo: blur.topAnchor),
-            heroName.leadingAnchor.constraint(equalTo: self.blur.leadingAnchor),
-            heroName.trailingAnchor.constraint(equalTo: self.blur.trailingAnchor),
-            heroName.bottomAnchor.constraint(equalTo: self.blur.bottomAnchor)
+            heroName.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor),
+            heroName.leadingAnchor.constraint(equalTo: self.heroImage.trailingAnchor, constant: 20),
+            heroName.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -20),
         ])
     }
 }

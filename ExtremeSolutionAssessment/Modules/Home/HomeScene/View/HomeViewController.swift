@@ -13,6 +13,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        containerView.onTapSearch = {
+            let vc = SearchViewController()
+            vc.modalPresentationStyle = .overFullScreen
+//            self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true)
+        }
         // Do any additional setup after loading the view.
     }
     
