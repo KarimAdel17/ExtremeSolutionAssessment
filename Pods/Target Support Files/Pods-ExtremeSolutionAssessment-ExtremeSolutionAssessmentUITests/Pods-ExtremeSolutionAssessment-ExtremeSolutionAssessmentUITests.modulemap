@@ -1,0 +1,6 @@
+framework module Pods_ExtremeSolutionAssessment_ExtremeSolutionAssessmentUITests {
+  umbrella header "Pods-ExtremeSolutionAssessment-ExtremeSolutionAssessmentUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
