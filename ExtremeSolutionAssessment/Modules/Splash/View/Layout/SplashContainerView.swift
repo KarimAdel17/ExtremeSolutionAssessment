@@ -24,7 +24,7 @@ class SplashContainerView: UIView {
         return image
     }()
     
-    let blur: UIVisualEffectView = {
+    lazy var blur: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false

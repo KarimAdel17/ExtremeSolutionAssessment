@@ -111,7 +111,8 @@ class HomeContainerView: UIView {
         ])
     }
     
-var onTapSearch: (() -> Void)?
+    var onTapSearch: (() -> Void)?
+    var onTapCell: (() -> Void)?
     
     @objc func didTappedSearch() {
         onTapSearch?()
@@ -135,6 +136,7 @@ extension HomeContainerView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        onTapRow?()
 //        presenter.navigateToNextScene(at: indexPath)
+        onTapCell?()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

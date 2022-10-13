@@ -34,7 +34,7 @@ class HerosTableViewCell: UITableViewCell {
         return label
     }()
     
-    let blur: UIVisualEffectView = {
+    lazy var blur: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemThinMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.alpha = 0.9

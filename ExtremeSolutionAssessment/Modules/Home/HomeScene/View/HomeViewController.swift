@@ -19,6 +19,11 @@ class HomeViewController: UIViewController {
 //            self.navigationController?.pushViewController(vc, animated: true)
             self.present(vc, animated: true)
         }
+        
+        containerView.onTapCell = {
+            let vc = HeroDescribtionViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         // Do any additional setup after loading the view.
     }
     
