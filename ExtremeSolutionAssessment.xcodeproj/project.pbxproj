@@ -18,6 +18,9 @@
 		D586D03028F715C1004D2C7D /* ExtremeSolutionAssessmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D02F28F715C1004D2C7D /* ExtremeSolutionAssessmentUITestsLaunchTests.swift */; };
 		D586D04428F79746004D2C7D /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D04328F79746004D2C7D /* SplashViewController.swift */; };
 		D586D04728F7979B004D2C7D /* SplashContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D04628F7979B004D2C7D /* SplashContainerView.swift */; };
+		D586D04B28F79E41004D2C7D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D04A28F79E41004D2C7D /* HomeViewController.swift */; };
+		D586D04E28F79EC2004D2C7D /* HomeContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D04D28F79EC2004D2C7D /* HomeContainerView.swift */; };
+		D586D05128F7A652004D2C7D /* HerosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D05028F7A652004D2C7D /* HerosTableViewCell.swift */; };
 		F48182A696B745171CAD68F1 /* Pods_ExtremeSolutionAssessmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790E312ACBC93D2C2F8387B1 /* Pods_ExtremeSolutionAssessmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,9 @@
 		D586D02F28F715C1004D2C7D /* ExtremeSolutionAssessmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtremeSolutionAssessmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D586D04328F79746004D2C7D /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		D586D04628F7979B004D2C7D /* SplashContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashContainerView.swift; sourceTree = "<group>"; };
+		D586D04A28F79E41004D2C7D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D586D04D28F79EC2004D2C7D /* HomeContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContainerView.swift; sourceTree = "<group>"; };
+		D586D05028F7A652004D2C7D /* HerosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerosTableViewCell.swift; sourceTree = "<group>"; };
 		EB210FC3873FA95A1FE25666 /* Pods-ExtremeSolutionAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExtremeSolutionAssessment.debug.xcconfig"; path = "Target Support Files/Pods-ExtremeSolutionAssessment/Pods-ExtremeSolutionAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +208,7 @@
 		D586D04128F796EF004D2C7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D586D04828F79E06004D2C7D /* HomeScene */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -221,6 +228,40 @@
 				D586D04628F7979B004D2C7D /* SplashContainerView.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		D586D04828F79E06004D2C7D /* HomeScene */ = {
+			isa = PBXGroup;
+			children = (
+				D586D04928F79E30004D2C7D /* View */,
+			);
+			path = HomeScene;
+			sourceTree = "<group>";
+		};
+		D586D04928F79E30004D2C7D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D586D04C28F79EB1004D2C7D /* Layout */,
+				D586D04A28F79E41004D2C7D /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D586D04C28F79EB1004D2C7D /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				D586D04F28F7A639004D2C7D /* Cells */,
+				D586D04D28F79EC2004D2C7D /* HomeContainerView.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		D586D04F28F7A639004D2C7D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D586D05028F7A652004D2C7D /* HerosTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,10 +502,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D586D04B28F79E41004D2C7D /* HomeViewController.swift in Sources */,
 				D586D04428F79746004D2C7D /* SplashViewController.swift in Sources */,
 				D586D04728F7979B004D2C7D /* SplashContainerView.swift in Sources */,
 				D586D00D28F715BE004D2C7D /* AppDelegate.swift in Sources */,
 				D586D00F28F715BE004D2C7D /* SceneDelegate.swift in Sources */,
+				D586D04E28F79EC2004D2C7D /* HomeContainerView.swift in Sources */,
+				D586D05128F7A652004D2C7D /* HerosTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,9 +44,8 @@ class SplashContainerView: UIView {
     private func layoutUserInterface() {
         addSubViews()
         setupBackgroundImage()
-        splashInterval()
+        setupBlur()
         setupLogoImage()
-//        bouncingLogo()
     }
     
     private func addSubViews() {
@@ -60,6 +59,15 @@ class SplashContainerView: UIView {
             backgroundImage.topAnchor.constraint(equalTo: self.topAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             backgroundImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -100)
+        ])
+    }
+    
+    private func setupBlur() {
+        NSLayoutConstraint.activate([
+            blur.topAnchor.constraint(equalTo: self.topAnchor),
+            blur.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            blur.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            blur.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     
