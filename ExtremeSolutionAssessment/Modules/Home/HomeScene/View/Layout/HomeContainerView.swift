@@ -157,8 +157,6 @@ extension HomeContainerView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        onTapRow?()
-//        presenter.navigateToNextScene(at: indexPath)
         
 //        delegate?.HomeViewController(self, didSelectHero: viewModel.getHero(index: indexPath.row))
         

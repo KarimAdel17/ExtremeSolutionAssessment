@@ -45,6 +45,11 @@
 		D586D09B28FA580E004D2C7D /* HeroDescriptionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D09A28FA580E004D2C7D /* HeroDescriptionFactory.swift */; };
 		D586D09E28FA5891004D2C7D /* HeroDescriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D09D28FA5891004D2C7D /* HeroDescriptionManager.swift */; };
 		D586D0A128FA5CB3004D2C7D /* HeroDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0A028FA5CB3004D2C7D /* HeroDescriptionViewModel.swift */; };
+		D586D0A728FADDA8004D2C7D /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0A628FADDA8004D2C7D /* SearchCoordinator.swift */; };
+		D586D0A928FADE8F004D2C7D /* SearchFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0A828FADE8F004D2C7D /* SearchFactory.swift */; };
+		D586D0AB28FADED1004D2C7D /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0AA28FADED1004D2C7D /* SearchManager.swift */; };
+		D586D0AD28FADF4E004D2C7D /* HeroShowsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0AC28FADF4E004D2C7D /* HeroShowsModel.swift */; };
+		D586D0AF28FADF76004D2C7D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0AE28FADF76004D2C7D /* SearchViewModel.swift */; };
 		F48182A696B745171CAD68F1 /* Pods_ExtremeSolutionAssessmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790E312ACBC93D2C2F8387B1 /* Pods_ExtremeSolutionAssessmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +119,11 @@
 		D586D09A28FA580E004D2C7D /* HeroDescriptionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDescriptionFactory.swift; sourceTree = "<group>"; };
 		D586D09D28FA5891004D2C7D /* HeroDescriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDescriptionManager.swift; sourceTree = "<group>"; };
 		D586D0A028FA5CB3004D2C7D /* HeroDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDescriptionViewModel.swift; sourceTree = "<group>"; };
+		D586D0A628FADDA8004D2C7D /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		D586D0A828FADE8F004D2C7D /* SearchFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactory.swift; sourceTree = "<group>"; };
+		D586D0AA28FADED1004D2C7D /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		D586D0AC28FADF4E004D2C7D /* HeroShowsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroShowsModel.swift; sourceTree = "<group>"; };
+		D586D0AE28FADF76004D2C7D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EB210FC3873FA95A1FE25666 /* Pods-ExtremeSolutionAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExtremeSolutionAssessment.debug.xcconfig"; path = "Target Support Files/Pods-ExtremeSolutionAssessment/Pods-ExtremeSolutionAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,8 +298,8 @@
 		D586D04828F79E06004D2C7D /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
-				D586D09028FA5001004D2C7D /* Factory */,
 				D586D08728F9CB31004D2C7D /* Coordinator */,
+				D586D09028FA5001004D2C7D /* Factory */,
 				D586D07D28F9B030004D2C7D /* Model */,
 				D586D04928F79E30004D2C7D /* View */,
 				D586D07728F9AE70004D2C7D /* ViewModel */,
@@ -326,7 +336,11 @@
 		D586D05428F7B5D1004D2C7D /* SearchScene */ = {
 			isa = PBXGroup;
 			children = (
+				D586D0A428FA7402004D2C7D /* Coordinator */,
+				D586D0A328FA73FC004D2C7D /* Factory */,
+				D586D0A228FA73F8004D2C7D /* Model */,
 				D586D05528F7B5DB004D2C7D /* View */,
+				D586D0A528FA741F004D2C7D /* ViewModel */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -360,11 +374,11 @@
 		D586D05E28F83B77004D2C7D /* HeroDescribtionScene */ = {
 			isa = PBXGroup;
 			children = (
-				D586D09F28FA5C9D004D2C7D /* ViewModel */,
-				D586D09C28FA587A004D2C7D /* Model */,
-				D586D09928FA57F7004D2C7D /* Factory */,
 				D586D09628FA566A004D2C7D /* Coordinator */,
+				D586D09928FA57F7004D2C7D /* Factory */,
+				D586D09C28FA587A004D2C7D /* Model */,
 				D586D05F28F83B92004D2C7D /* View */,
+				D586D09F28FA5C9D004D2C7D /* ViewModel */,
 			);
 			path = HeroDescribtionScene;
 			sourceTree = "<group>";
@@ -492,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				D586D09D28FA5891004D2C7D /* HeroDescriptionManager.swift */,
+				D586D0AC28FADF4E004D2C7D /* HeroShowsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -500,6 +515,38 @@
 			isa = PBXGroup;
 			children = (
 				D586D0A028FA5CB3004D2C7D /* HeroDescriptionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D586D0A228FA73F8004D2C7D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D586D0AA28FADED1004D2C7D /* SearchManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D586D0A328FA73FC004D2C7D /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				D586D0A828FADE8F004D2C7D /* SearchFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		D586D0A428FA7402004D2C7D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				D586D0A628FADDA8004D2C7D /* SearchCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D586D0A528FA741F004D2C7D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D586D0AE28FADF76004D2C7D /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -743,9 +790,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D586D07F28F9B046004D2C7D /* HomeManager.swift in Sources */,
+				D586D0AD28FADF4E004D2C7D /* HeroShowsModel.swift in Sources */,
+				D586D0AB28FADED1004D2C7D /* SearchManager.swift in Sources */,
 				D586D04B28F79E41004D2C7D /* HomeViewController.swift in Sources */,
 				D586D07428F87452004D2C7D /* Disposable.swift in Sources */,
 				D586D08E28FA4F1D004D2C7D /* Networking.swift in Sources */,
+				D586D0AF28FADF76004D2C7D /* SearchViewModel.swift in Sources */,
 				D586D07C28F9AF90004D2C7D /* HomeFactory.swift in Sources */,
 				D586D08328F9C936004D2C7D /* DependencyManager.swift in Sources */,
 				D586D06E28F86EBB004D2C7D /* Observer.swift in Sources */,
@@ -754,6 +804,7 @@
 				D586D06928F849B9004D2C7D /* ShowCollectionViewCell.swift in Sources */,
 				D586D08628F9CAA3004D2C7D /* Coordinator.swift in Sources */,
 				D586D04428F79746004D2C7D /* SplashViewController.swift in Sources */,
+				D586D0A728FADDA8004D2C7D /* SearchCoordinator.swift in Sources */,
 				D586D0A128FA5CB3004D2C7D /* HeroDescriptionViewModel.swift in Sources */,
 				D586D06C28F85DD3004D2C7D /* DynamicTableView.swift in Sources */,
 				D586D06128F83C44004D2C7D /* HeroDescribtionViewController.swift in Sources */,
@@ -769,6 +820,7 @@
 				D586D00D28F715BE004D2C7D /* AppDelegate.swift in Sources */,
 				D586D09E28FA5891004D2C7D /* HeroDescriptionManager.swift in Sources */,
 				D586D00F28F715BE004D2C7D /* SceneDelegate.swift in Sources */,
+				D586D0A928FADE8F004D2C7D /* SearchFactory.swift in Sources */,
 				D586D08B28FA4E39004D2C7D /* HomeModel.swift in Sources */,
 				D586D04E28F79EC2004D2C7D /* HomeContainerView.swift in Sources */,
 				D586D07628F87492004D2C7D /* DisposeBag.swift in Sources */,

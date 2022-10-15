@@ -10,7 +10,7 @@ import Moya
 
 enum Networking: Hashable {
     case getHeros(offset: Int)
-    case getHeroDetails(heroId: Int)
+    case getSearchHeros(searchText: String)
 }
 
 extension Networking: TargetType {
@@ -24,24 +24,22 @@ extension Networking: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getHeros, .getHeroDetails:
+        case .getHeros, .getSearchHeros:
             return .get
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .getHeros, .getHeroDetails:
+        case .getHeros, .getSearchHeros:
             return ["Accept":"application/json"]
         }
     }
     
     var path: String {
         switch self {
-        case .getHeros:
+        case .getHeros, .getSearchHeros:
             return "v1/public/characters"
-        case let .getHeroDetails(heroId):
-            return "v1/public/characters/\(heroId)"
         }
     }
 
@@ -49,8 +47,8 @@ extension Networking: TargetType {
         switch self {
         case let .getHeros(offset):
             return .requestParameters(parameters: ["apikey":"667c2ea342db649c8fdb6917c4493160", "hash":"b637bc4d295f2a02c41a265e267c90e8", "ts":"20:56:38Z", "offset":offset], encoding: URLEncoding.queryString)
-        case .getHeroDetails:
-            return .requestParameters(parameters: ["apikey":"667c2ea342db649c8fdb6917c4493160", "hash":"b637bc4d295f2a02c41a265e267c90e8", "ts":"20:56:38Z"], encoding: URLEncoding.queryString)
+        case let .getSearchHeros(searchText):
+            return .requestParameters(parameters: ["apikey":"667c2ea342db649c8fdb6917c4493160", "hash":"b637bc4d295f2a02c41a265e267c90e8", "ts":"20:56:38Z", "nameStartsWith": searchText], encoding: URLEncoding.queryString)
         }
     }
 }

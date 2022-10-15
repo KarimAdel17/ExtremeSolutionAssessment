@@ -50,8 +50,3 @@ class HeroDescriptionViewModel {
         heroShows[index]
     }
 }
-
-struct HeroShows {
-    let showKind: String?
-    let show: [ComicsItem]?
-}

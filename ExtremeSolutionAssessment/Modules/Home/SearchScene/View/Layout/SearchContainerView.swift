@@ -10,6 +10,9 @@ import UIKit
 
 class SearchContainerView: UIView {
     
+    let viewModel: SearchViewModel!
+    var timer: Timer?
+    
     lazy var blur: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -47,6 +50,9 @@ class SearchContainerView: UIView {
         searchBar.layer.cornerRadius = 20
         searchBar.clipsToBounds = true
         searchBar.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        searchBar.searchTextField.delegate = self
+        searchBar.searchTextField.becomeFirstResponder()
+//        searchBar.searchTextField.addTarget(self, action: #selector(didTappedSearch), for: .editingChanged)
         return searchBar
     }()
     
@@ -55,6 +61,7 @@ class SearchContainerView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(#colorLiteral(red: 1, green: 0.5370028615, blue: 0.5585802197, alpha: 1), for: .normal)
+        button.addTarget(self, action: #selector(didTappedCancel), for: .touchUpInside)
         return button
     }()
     
@@ -72,7 +79,8 @@ class SearchContainerView: UIView {
         return tableView
     }()
     
-    init() {
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         layoutUserInterface()
     }
@@ -123,28 +131,74 @@ class SearchContainerView: UIView {
             searchHerosTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
+    
+    var onTapSearch: ((_ searchText: String) -> Void)?
+    var onTapCancel: (() -> Void)?
+    var onTapCell: ((_ index: Int) -> Void)?
+    
+    @objc func didTappedSearch() {
+        if let searchText = searchBar.searchTextField.text, !searchText.isEmpty {
+                onTapSearch?(searchText)
+        } else {
+            searchHerosTableView.reloadData()
+        }
+    }
+    
+    @objc func didTappedCancel() {
+        onTapCancel?()
+    }
+    
+    func bind(_ hero: HerosData, with cell: SearchHerosTableViewCell) -> SearchHerosTableViewCell {
+//        cell.apply {
+        
+        cell.heroName.text = hero.name
+        
+        if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
+            let allPath = path + "." + imageExtension
+            if let url = URL(string: allPath) {
+                cell.heroImage.kf.indicatorType = .activity
+                cell.heroImage.kf.setImage(with: url)
+            }
+        }
+        return cell
+    }
 }
 
 extension SearchContainerView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        guard let searchBar = searchBar.searchTextField.text, !searchBar.isEmpty else {
+            return 0
+        }
+        return viewModel.getHerosCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchHerosTableViewCell.self), for: indexPath) as? SearchHerosTableViewCell else {
-            return UITableViewCell()
+            return SearchHerosTableViewCell()
         }
-        cell.heroImage.image = UIImage(named: "mcu-background")
-        cell.heroName.text = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
-        return cell
+        
+        let hero = viewModel.getHero(index: indexPath.row)
+        return bind(hero, with: cell)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        onTapRow?()
-//        presenter.navigateToNextScene(at: indexPath)
+        onTapCell?(indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
          100
     }
+}
+
+extension SearchContainerView: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.didTappedSearch), userInfo: nil, repeats: false);
+        
+        return true
+    }
+
 }

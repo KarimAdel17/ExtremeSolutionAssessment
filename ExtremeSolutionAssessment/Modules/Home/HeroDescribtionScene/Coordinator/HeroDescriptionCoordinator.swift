@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol HeroDescriptionCoordinatorDelegate: AnyObject {
-    func HeroDescriptionCoordinator(_ HeroDescriptionCoordinator: HeroDescriptionCoordinator)
+    func heroDescriptionCoordinator(_ HeroDescriptionCoordinator: HeroDescriptionCoordinator)
 }
 
 protocol HeroDescriptionCoordinatorProtocol: AnyObject {
@@ -43,6 +43,6 @@ extension HeroDescriptionCoordinator: HeroDescriptionViewControllerDelegate {
 //    }
     
     func popHeroDescriptionViewController() {
-        delegate?.HeroDescriptionCoordinator(self)
+        delegate?.heroDescriptionCoordinator(self)
     }
 }
