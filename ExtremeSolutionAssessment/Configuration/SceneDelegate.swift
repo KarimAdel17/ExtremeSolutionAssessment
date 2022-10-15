@@ -19,35 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-//        let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = SplashViewController()
-//        self.window = window
-//        window.makeKeyAndVisible()
-        
-//        guard let coordinatorStub = ProcessInfo.processInfo.decode(CoordinatorStub.self) else {
-//            coordinator.start()
-////            return true
-//        }
-
-//        switch coordinatorStub {
-//        case .start:
-//            coordinator.start()
-//        case let .openStory(story):
-//            coordinator.open(story)
-//        case let .openUrl(url):
-//            coordinator.open(url)
-//        }
-        
         let networkManager = NetworkManager()
-//        let networkManager = NetworkManager(session: session)
         let factory = DependencyManager(networkManager: networkManager)
         let window = UIWindow(windowScene: windowScene)
 
         coordinator = Coordinator(factory: factory, window: window)
-        
-        coordinator.start()
 
-//        return true
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

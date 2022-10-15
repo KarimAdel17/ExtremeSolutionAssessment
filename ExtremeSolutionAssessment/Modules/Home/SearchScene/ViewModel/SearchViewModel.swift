@@ -17,8 +17,7 @@ class SearchViewModel {
     }
     
     private var heros = [HerosData]()
-    //    private var offset: Int?
-    private var offset = -20
+    private var offset = 0
     private var total: Int?
     private var count: Int?
     
@@ -46,11 +45,6 @@ class SearchViewModel {
     
     func searchHeros(_ observer: @escaping Observer<DataClass>, searchText: String) -> Disposable {
         
-//        offset += 20
-//        if searchText.isEmpty {
-//            heros.removeAll()
-//        }
-        
         return SearchManager.searchHeros({ [weak self] result in
             switch result {
             case let .success(herosData):
@@ -64,5 +58,24 @@ class SearchViewModel {
             }
             observer(result)
         }, searchText: searchText)
+    }
+    
+    func paginatedSearchHeros(_ observer: @escaping Observer<DataClass>, searchText: String) -> Disposable {
+        
+        offset += 20
+        
+        return SearchManager.searchHeros({ [weak self] result in
+            switch result {
+            case let .success(herosData):
+                self?.total = herosData.total
+                self?.count = herosData.count
+                if let heros = herosData.results {
+                    self?.heros.append(contentsOf: heros)
+                }
+            case let .failure(error):
+                print(error)
+            }
+            observer(result)
+        }, searchText: searchText, offset: offset)
     }
 }

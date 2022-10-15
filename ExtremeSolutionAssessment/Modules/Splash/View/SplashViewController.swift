@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol SplashViewControllerDelegate: AnyObject {
+    func splashViewController(_ SplashViewController: SplashViewController)
+}
+
 class SplashViewController: UIViewController {
+    
+    weak var delegate: SplashViewControllerDelegate?
     
     lazy var containerView = SplashContainerView()
     
@@ -24,12 +30,9 @@ class SplashViewController: UIViewController {
     
     private func splashInterval() {
         Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-            DispatchQueue.main.async {
-                let homeViewController = HomeViewController()
-                
-                let navigationController = UINavigationController(rootViewController: homeViewController)
-                navigationController.isNavigationBarHidden = true
-                self.view.window?.rootViewController = navigationController
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.splashViewController(self)
             }
         }
     }

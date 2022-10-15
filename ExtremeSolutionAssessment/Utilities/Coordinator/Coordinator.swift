@@ -17,8 +17,14 @@ protocol CoordinatorProtocol: AnyObject {
 }
 
 final class Coordinator {
-    typealias Factory = HomeFactory & HeroDescriptionFactory & SearchFactory
+    typealias Factory = SplashFactory & HomeFactory & HeroDescriptionFactory & SearchFactory
 
+    var splashCoordinator: SplashCoordinatorProtocol {
+        didSet {
+            splashCoordinator.delegate = self
+        }
+    }
+    
     var homeCoordinator: HomeCoordinatorProtocol {
         didSet {
             homeCoordinator.delegate = self
@@ -42,15 +48,19 @@ final class Coordinator {
     private let window: UIWindow
 
     init(factory: Factory, window: UIWindow) {
+        splashCoordinator = ExtremeSolutionAssessment.SplashCoordinator(factory: factory)
         homeCoordinator = ExtremeSolutionAssessment.HomeCoordinator(factory: factory)
         heroDescriptionCoordinator = ExtremeSolutionAssessment.HeroDescriptionCoordinator(factory: factory)
         searchCoordinator = ExtremeSolutionAssessment.SearchCoordinator(factory: factory)
-
+        
+        let splash = splashCoordinator.start()
+        
         self.window = window
         navigationController.isNavigationBarHidden = true
-        self.window.rootViewController = navigationController
+        self.window.rootViewController = splash
         self.window.makeKeyAndVisible()
 
+        splashCoordinator.delegate = self
         homeCoordinator.delegate = self
         heroDescriptionCoordinator.delegate = self
         searchCoordinator.delegate = self
@@ -59,6 +69,8 @@ final class Coordinator {
 
 extension Coordinator: CoordinatorProtocol {
     func start() {
+        self.window.rootViewController = navigationController
+        self.window.makeKeyAndVisible()
         let viewController = homeCoordinator.start()
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -107,5 +119,11 @@ extension Coordinator: SearchCoordinatorDelegate {
     
     func searchCoordinator(_ SearchCoordinator: SearchCoordinator) {
         dismissSearch()
+    }
+}
+
+extension Coordinator: SplashCoordinatorDelegate {
+    func splashCoordinator(_ SplashCoordinator: SplashCoordinator) {
+        start()
     }
 }

@@ -17,7 +17,6 @@ class HomeViewModel {
     }
     
     private var heros = [HerosData]()
-//    private var offset: Int?
     private var offset = -20
     private var total: Int?
     private var count: Int?
@@ -51,13 +50,9 @@ class HomeViewModel {
         return homeManager.heros({ [weak self] result in
             switch result {
             case let .success(herosData):
-//                if let offset = herosData.offset {
-//                    self?.offset = offset + 20
-//                }
                 self?.total = herosData.total
                 self?.count = herosData.count
                 if let heros = herosData.results {
-//                    self?.heros = heros
                     self?.heros.append(contentsOf: heros)
                 }
             case .failure:
@@ -65,10 +60,5 @@ class HomeViewModel {
             }
             observer(result)
         }, offset: offset)
-    }
-    
-    func refresh() {
-//        offset += 20
-        homeManager.fetchHeros(offset: offset)
     }
 }

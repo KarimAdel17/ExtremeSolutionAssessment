@@ -66,13 +66,11 @@ class HomeViewController: UIViewController {
             .heros { [weak self] result in
                 switch result {
                 case .success:
-//                    self?.apply(onMainThread: true) {
+                    self?.apply(onMainThread: true) {_ in
                     self?.containerView.herosTableView.reloadData()
-//                        $0.refreshControl?.endRefreshing()
-//                    }
+                    }
                 case let .failure(error):
                     print(error)
-//                    self?.present(error)
                 }
             }.disposed(by: disposeBag)
     }

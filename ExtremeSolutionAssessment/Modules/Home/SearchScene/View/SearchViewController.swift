@@ -43,10 +43,9 @@ class SearchViewController: UIViewController {
             self.delegate?.searchViewController(self, didSelectHero: self.viewModel.getHero(index: index))
         }
         
-//        let backgroundImage = getImageWithCustomColor(color: UIColor.clear, size: CGSize(width: 60, height: 60))
-//
-//        containerView.searchBar.setSearchFieldBackgroundImage(backgroundImage, for: .normal)
-        // Do any additional setup after loading the view.
+        containerView.Pagination = { [weak self] searchText in
+            self?.getPaginatedSearchData(searchText: searchText)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,29 +59,30 @@ class SearchViewController: UIViewController {
         self.view = containerView
     }
     
+    func getPaginatedSearchData(searchText: String) {
+        viewModel.paginatedSearchHeros({ [weak self] result in
+            switch result {
+            case .success:
+                    self?.apply(onMainThread: true) { _ in
+                self?.containerView.searchHerosTableView.reloadData()
+                    }
+            case let .failure(error):
+                print(error)
+            }
+        }, searchText: searchText).disposed(by: disposeBag)
+    }
+    
     func getSearchData(searchText: String) {
         
         viewModel.searchHeros({ [weak self] result in
             switch result {
             case .success:
-//                    self?.apply(onMainThread: true) {
+                self?.apply(onMainThread: true) {_ in
                 self?.containerView.searchHerosTableView.reloadData()
-//                        $0.refreshControl?.endRefreshing()
-//                    }
+                    }
             case let .failure(error):
                 print(error)
-//                    self?.present(error)
             }
         }, searchText: searchText).disposed(by: disposeBag)
-    }
-    
-    func getImageWithCustomColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 0, height: size.height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        color.setFill()
-        UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
     }
 }

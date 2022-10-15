@@ -22,6 +22,7 @@ class HerosTableViewCell: UITableViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 30
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
         return image
     }()
     

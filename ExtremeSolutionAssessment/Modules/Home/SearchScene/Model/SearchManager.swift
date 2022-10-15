@@ -10,6 +10,7 @@ import Foundation
 protocol SearchManagerProtocol {
     @discardableResult
     func searchHeros(_ observer: @escaping Observer<DataClass>, searchText: String) -> Disposable
+    func searchHeros(_ observer: @escaping Observer<DataClass>, searchText: String, offset: Int) -> Disposable
 }
 
 struct SearchManager {
@@ -25,6 +26,26 @@ extension SearchManager: SearchManagerProtocol {
     public func searchHeros(_ observer: @escaping Observer<DataClass>, searchText: String) -> Disposable {
         
         networkManager.observe(.getSearchHeros(searchText: searchText)) { result in
+            switch result {
+            case let .success(data):
+                do {
+                    let home = try JSONDecoder().decode(Home.self, from: data)
+                    print(home)
+                    if let herosData = home.data {
+                        observer(.success(herosData))
+                    }
+                } catch {
+                    observer(.failure(error))
+                }
+                
+            case let .failure(error):
+                observer(.failure(error))
+            }
+        }
+    }
+    
+    func searchHeros(_ observer: @escaping Observer<DataClass>, searchText: String, offset: Int) -> Disposable {
+        networkManager.observe(.getPaginatedSearchHeros(searchText: searchText, offset: offset)) { result in
             switch result {
             case let .success(data):
                 do {

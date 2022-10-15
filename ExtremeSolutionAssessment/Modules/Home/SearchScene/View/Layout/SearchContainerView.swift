@@ -52,7 +52,6 @@ class SearchContainerView: UIView {
         searchBar.heightAnchor.constraint(equalToConstant: 70).isActive = true
         searchBar.searchTextField.delegate = self
         searchBar.searchTextField.becomeFirstResponder()
-//        searchBar.searchTextField.addTarget(self, action: #selector(didTappedSearch), for: .editingChanged)
         return searchBar
     }()
     
@@ -116,7 +115,6 @@ class SearchContainerView: UIView {
     
     private func setupSearchStack() {
         NSLayoutConstraint.activate([
-//            searchStack.heightAnchor.constraint(equalToConstant: 70),
             searchStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 70),
             searchStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             searchStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
@@ -135,10 +133,11 @@ class SearchContainerView: UIView {
     var onTapSearch: ((_ searchText: String) -> Void)?
     var onTapCancel: (() -> Void)?
     var onTapCell: ((_ index: Int) -> Void)?
+    var Pagination: ((_ searchText: String) -> Void)?
     
     @objc func didTappedSearch() {
         if let searchText = searchBar.searchTextField.text, !searchText.isEmpty {
-                onTapSearch?(searchText)
+            onTapSearch?(searchText)
         } else {
             searchHerosTableView.reloadData()
         }
@@ -149,44 +148,33 @@ class SearchContainerView: UIView {
     }
     
     func bind(_ hero: HerosData, with cell: SearchHerosTableViewCell) -> SearchHerosTableViewCell {
-//        cell.apply {
-        
-        cell.heroName.text = hero.name
-        
-        if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
-            let allPath = path + "." + imageExtension
-            if let url = URL(string: allPath) {
-                cell.heroImage.kf.indicatorType = .activity
-                cell.heroImage.kf.setImage(with: url)
+        cell.apply { _ in
+            
+            let attrStr = NSMutableAttributedString(string: hero.name ?? "")
+            let inputLength = attrStr.string.count
+            if let searchString = self.searchBar.searchTextField.text {
+                let searchLength = searchString.count
+                var range = NSRange(location: 0, length: attrStr.length)
+                
+                while (range.location != NSNotFound) {
+                    range = (attrStr.string.lowercased() as NSString).range(of: searchString.lowercased(), options: [], range: range)
+                    if (range.location != NSNotFound) {
+                        attrStr.addAttribute(NSAttributedString.Key.backgroundColor, value:  UIColor.red.withAlphaComponent(0.5), range: NSRange(location: range.location, length: searchLength))
+                        range = NSRange(location: range.location + range.length, length: inputLength - (range.location + range.length))
+                        cell.heroName.attributedText = attrStr
+                    }
+                }
+            }
+            
+            if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
+                let allPath = path + "." + imageExtension
+                if let url = URL(string: allPath) {
+                    cell.heroImage.kf.indicatorType = .activity
+                    cell.heroImage.kf.setImage(with: url)
+                }
             }
         }
         return cell
-    }
-}
-
-extension SearchContainerView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let searchBar = searchBar.searchTextField.text, !searchBar.isEmpty else {
-            return 0
-        }
-        return viewModel.getHerosCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchHerosTableViewCell.self), for: indexPath) as? SearchHerosTableViewCell else {
-            return SearchHerosTableViewCell()
-        }
-        
-        let hero = viewModel.getHero(index: indexPath.row)
-        return bind(hero, with: cell)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        onTapCell?(indexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         100
     }
 }
 
@@ -200,5 +188,5 @@ extension SearchContainerView: UITextFieldDelegate {
         
         return true
     }
-
+    
 }

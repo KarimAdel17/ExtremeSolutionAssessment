@@ -64,7 +64,6 @@ class ShowCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             comicName.topAnchor.constraint(equalTo: comicImage.bottomAnchor, constant: 6),
             comicName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -3),
-//            comicName.centerXAnchor.constraint(equalTo: self.centerXAnchor)
             comicName.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             comicName.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])

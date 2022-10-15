@@ -38,9 +38,6 @@ extension HeroDescriptionCoordinator: HeroDescriptionCoordinatorProtocol {
 }
 
 extension HeroDescriptionCoordinator: HeroDescriptionViewControllerDelegate {
-//    func HeroDescriptionViewController(_: HeroDescribtionViewController, didSelectHero hero: HerosData) {
-//        delegate?.HeroDescriptionCoordinator(self, didOpenHero: hero)
-//    }
     
     func popHeroDescriptionViewController() {
         delegate?.heroDescriptionCoordinator(self)

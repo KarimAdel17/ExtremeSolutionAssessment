@@ -11,6 +11,14 @@ struct DependencyManager {
     let networkManager: NetworkManagerProtocol
 }
 
+extension DependencyManager: SplashFactory {
+    func makeSplashViewController() -> SplashViewController {
+        let viewController = SplashViewController()
+
+        return viewController
+    }
+}
+
 extension DependencyManager: HomeFactory {
     func makeHomeManager() -> HomeManagerProtocol {
         HomeManager(networkManager: networkManager)
@@ -27,7 +35,7 @@ extension DependencyManager: HomeFactory {
 extension DependencyManager: HeroDescriptionFactory {
     
     func makeHeroDescriptionManager(for hero: HerosData) -> HeroDescriptionManagerProtocol {
-        HeroDescriptionManager(hero: hero)
+        HeroDescriptionManager(hero: hero, networkManager: networkManager)
     }
     
     func makeHeroDescriptionViewController(for hero: HerosData) -> HeroDescribtionViewController {
