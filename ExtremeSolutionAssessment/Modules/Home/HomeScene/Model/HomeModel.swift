@@ -26,7 +26,7 @@ struct HerosData: Codable {
     let thumbnail: Thumbnail?
     let resourceURI: String?
     let comics, series: Comics?
-    let stories: Stories?
+    let stories: Comics?
     let events: Comics?
     let urls: [URLElement]?
 
@@ -47,20 +47,21 @@ struct Comics: Codable {
 struct ComicsItem: Codable {
     let resourceURI: String?
     let name: String?
-}
-
-struct Stories: Codable {
-    let available: Int?
-    let collectionURI: String?
-    let items: [StoriesItem]?
-    let returned: Int?
-}
-
-struct StoriesItem: Codable {
-    let resourceURI: String?
-    let name: String?
     let type: String?
 }
+
+//struct Stories: Codable {
+//    let available: Int?
+//    let collectionURI: String?
+//    let items: [StoriesItem]?
+//    let returned: Int?
+//}
+
+//struct StoriesItem: Codable {
+//    let resourceURI: String?
+//    let name: String?
+//    let type: String?
+//}
 
 struct Thumbnail: Codable {
     let path: String?

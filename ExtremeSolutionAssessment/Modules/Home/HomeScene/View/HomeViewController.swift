@@ -22,7 +22,6 @@ class HomeViewController: UIViewController {
     
     let network = NetworkManager()
     
-    
     lazy var containerView: HomeContainerView = {
         let view = HomeContainerView(viewModel: viewModel)
         return view
@@ -49,13 +48,6 @@ class HomeViewController: UIViewController {
             self.delegate?.HomeViewController(self, didSelectHero: self.viewModel.getHero(index: index))
         }
         
-//        containerView.onTapCell = { [weak self] in
-//
-//
-//
-////            let vc = HeroDescribtionViewController()
-////            self?.navigationController?.pushViewController(vc, animated: true)
-//        }
         // Do any additional setup after loading the view.
     }
     

@@ -11,14 +11,21 @@ import UIKit
 protocol CoordinatorProtocol: AnyObject {
     func start()
     func navigateTo(_ hero: HerosData)
+    func popViewController()
 }
 
 final class Coordinator {
-    typealias Factory = HomeFactory
+    typealias Factory = HomeFactory & HeroDescriptionFactory
 
-    var HomeCoordinator: HomeCoordinatorProtocol {
+    var homeCoordinator: HomeCoordinatorProtocol {
         didSet {
-            HomeCoordinator.delegate = self
+            homeCoordinator.delegate = self
+        }
+    }
+    
+    var heroDescriptionCoordinator: HeroDescriptionCoordinatorProtocol {
+        didSet {
+            heroDescriptionCoordinator.delegate = self
         }
     }
 
@@ -27,32 +34,43 @@ final class Coordinator {
     private let window: UIWindow
 
     init(factory: Factory, window: UIWindow) {
-        HomeCoordinator = ExtremeSolutionAssessment.HomeCoordinator(factory: factory)
+        homeCoordinator = ExtremeSolutionAssessment.HomeCoordinator(factory: factory)
+        heroDescriptionCoordinator = ExtremeSolutionAssessment.HeroDescriptionCoordinator(factory: factory)
 
         self.window = window
         navigationController.isNavigationBarHidden = true
         self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
 
-        HomeCoordinator.delegate = self
+        homeCoordinator.delegate = self
+        heroDescriptionCoordinator.delegate = self
     }
 }
 
 extension Coordinator: CoordinatorProtocol {
     func start() {
-        let viewController = HomeCoordinator.start()
+        let viewController = homeCoordinator.start()
         navigationController.pushViewController(viewController, animated: true)
     }
     
     func navigateTo(_ hero: HerosData) {
-        let viewController = HeroDescriptionCoordinator.start()
-        viewController.heroId = hero.id
+        let viewController = heroDescriptionCoordinator.start(hero: hero)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func popViewController() {
+        navigationController.popViewController(animated: true)
     }
 }
 
 extension Coordinator: HomeCoordinatorDelegate {
     func HomeCoordinator(_: HomeCoordinator, didOpenHero hero: HerosData) {
         navigateTo(hero)
+    }
+}
+    
+extension Coordinator: HeroDescriptionCoordinatorDelegate {
+    func HeroDescriptionCoordinator(_ HeroDescriptionCoordinator: HeroDescriptionCoordinator) {
+        popViewController()
     }
 }

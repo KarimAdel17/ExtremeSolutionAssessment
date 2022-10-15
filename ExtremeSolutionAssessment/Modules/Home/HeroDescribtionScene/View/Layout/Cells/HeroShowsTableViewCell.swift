@@ -9,6 +9,12 @@ import UIKit
 
 class HeroShowsTableViewCell: UITableViewCell {
 
+    var shows: [ComicsItem]? {
+        didSet {
+            showCollectionView.reloadData()
+        }
+    }
+    
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +39,7 @@ class HeroShowsTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        let size = (UIScreen.main.bounds.width - CGFloat(30))
-        layout.itemSize = CGSize(width: 65, height: 103)
+        layout.itemSize = CGSize(width: 65, height: 120)
         collectionView.setCollectionViewLayout(layout, animated: true)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
@@ -116,13 +122,24 @@ class HeroShowsTableViewCell: UITableViewCell {
 
 extension HeroShowsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        print(shows?.count)
+        return shows?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(ShowCollectionViewCell.self), for: indexPath) as? ShowCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        cell.comicName.text = shows?[indexPath.row].name
+//        if let path = shows.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
+//            let allPath = path + "." + imageExtension
+//            if let url = URL(string: allPath) {
+//                cell.comicImage.kf.indicatorType = .activity
+//                cell.comicImage.kf.setImage(with: url)
+//            }
+//        }
+        
 //        cell.heroImage.image = UIImage(named: "mcu-background")
 //        cell.heroName.text = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
         return cell
