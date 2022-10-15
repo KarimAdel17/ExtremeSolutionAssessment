@@ -10,6 +10,8 @@ import UIKit
 
 class HomeContainerView: UIView {
     
+    let viewModel: HomeViewModel!
+    
     lazy var searchView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +51,8 @@ class HomeContainerView: UIView {
         return tableView
     }()
     
-    init() {
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         self.backgroundColor = #colorLiteral(red: 0.08235292882, green: 0.08235292882, blue: 0.08235292882, alpha: 1)
         layoutUserInterface()
@@ -112,34 +115,92 @@ class HomeContainerView: UIView {
     }
     
     var onTapSearch: (() -> Void)?
-    var onTapCell: (() -> Void)?
+    var onTapCell: ((_ index: Int) -> Void)?
+    var Pagination: (() -> Void)?
     
     @objc func didTappedSearch() {
         onTapSearch?()
+    }
+    
+    func bind(_ hero: HerosData, with cell: HerosTableViewCell) -> HerosTableViewCell {
+//        cell.apply {
+        
+        cell.heroName.text = hero.name
+        
+        if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
+            let allPath = path + "." + imageExtension
+            print(allPath)
+            if let url = URL(string: allPath) {
+                print(url)
+                cell.heroImage.kf.indicatorType = .activity
+                cell.heroImage.kf.setImage(with: url)
+            }
+        }
+        //        }
+
+//        guard let url = story.imageUrl(.small) else {
+//            cell.multimediaImageView.isHidden = true
+//            return cell
+//        }
+//
+//        viewModel
+//            .image(with: url) { result in
+//                switch result {
+//                case let .success(image):
+//                    cell.apply(onMainThread: true) {
+//                        $0.multimediaImageView.image = image
+//                        $0.multimediaImageView.isHidden = false
+//                    }
+//
+//                case .failure:
+//                    cell.apply(onMainThread: true) {
+//                        $0.multimediaImageView.isHidden = true
+//                    }
+//                }
+//            }?.disposed(by: disposeBag)
+
+        return cell
     }
 }
 
 extension HomeContainerView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        viewModel.getHerosCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(HerosTableViewCell.self), for: indexPath) as? HerosTableViewCell else {
-            return UITableViewCell()
+            return HerosTableViewCell()
         }
-        cell.heroImage.image = UIImage(named: "mcu-background")
-        cell.heroName.text = "asdasdasd"
-        return cell
+
+        guard indexPath.row < viewModel.getHerosCount() else {
+            return cell
+        }
+
+        let hero = viewModel.getHero(index: indexPath.row)
+        return bind(hero, with: cell)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        onTapRow?()
 //        presenter.navigateToNextScene(at: indexPath)
-        onTapCell?()
+        
+//        delegate?.HomeViewController(self, didSelectHero: viewModel.getHero(index: indexPath.row))
+        
+        onTapCell?(indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
          200
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (viewModel.getHerosCount() - 3) {
+            if viewModel.getTotal() > viewModel.getCurrent() {
+                Pagination?()
+//                viewModel.refresh()
+            }
+        }
+    }
 }
+
