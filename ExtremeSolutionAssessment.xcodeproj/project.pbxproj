@@ -50,6 +50,12 @@
 		D586D0AB28FADED1004D2C7D /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0AA28FADED1004D2C7D /* SearchManager.swift */; };
 		D586D0AD28FADF4E004D2C7D /* HeroShowsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0AC28FADF4E004D2C7D /* HeroShowsModel.swift */; };
 		D586D0AF28FADF76004D2C7D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0AE28FADF76004D2C7D /* SearchViewModel.swift */; };
+		D586D0B128FB45C7004D2C7D /* HeroDescriptionContainerView+TableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0B028FB45C7004D2C7D /* HeroDescriptionContainerView+TableDelegate.swift */; };
+		D586D0B328FB4626004D2C7D /* SearchContainerView+TableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0B228FB4626004D2C7D /* SearchContainerView+TableDelegate.swift */; };
+		D586D0B528FB465A004D2C7D /* HomeContainerView+TableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0B428FB465A004D2C7D /* HomeContainerView+TableDelegate.swift */; };
+		D586D0B828FB47A2004D2C7D /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0B728FB47A2004D2C7D /* SplashCoordinator.swift */; };
+		D586D0BB28FB47EB004D2C7D /* SplashFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0BA28FB47EB004D2C7D /* SplashFactory.swift */; };
+		D586D0C028FB5D5E004D2C7D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D0BF28FB5D5E004D2C7D /* Thread.swift */; };
 		F48182A696B745171CAD68F1 /* Pods_ExtremeSolutionAssessmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790E312ACBC93D2C2F8387B1 /* Pods_ExtremeSolutionAssessmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +130,12 @@
 		D586D0AA28FADED1004D2C7D /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		D586D0AC28FADF4E004D2C7D /* HeroShowsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroShowsModel.swift; sourceTree = "<group>"; };
 		D586D0AE28FADF76004D2C7D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		D586D0B028FB45C7004D2C7D /* HeroDescriptionContainerView+TableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeroDescriptionContainerView+TableDelegate.swift"; sourceTree = "<group>"; };
+		D586D0B228FB4626004D2C7D /* SearchContainerView+TableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchContainerView+TableDelegate.swift"; sourceTree = "<group>"; };
+		D586D0B428FB465A004D2C7D /* HomeContainerView+TableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeContainerView+TableDelegate.swift"; sourceTree = "<group>"; };
+		D586D0B728FB47A2004D2C7D /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		D586D0BA28FB47EB004D2C7D /* SplashFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFactory.swift; sourceTree = "<group>"; };
+		D586D0BF28FB5D5E004D2C7D /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		EB210FC3873FA95A1FE25666 /* Pods-ExtremeSolutionAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExtremeSolutionAssessment.debug.xcconfig"; path = "Target Support Files/Pods-ExtremeSolutionAssessment/Pods-ExtremeSolutionAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,6 +275,8 @@
 		D586D04028F796E5004D2C7D /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				D586D0B928FB47DC004D2C7D /* Factory */,
+				D586D0B628FB4791004D2C7D /* Coordinator */,
 				D586D04228F7972E004D2C7D /* View */,
 			);
 			path = Splash;
@@ -321,6 +335,7 @@
 			children = (
 				D586D04F28F7A639004D2C7D /* Cells */,
 				D586D04D28F79EC2004D2C7D /* HomeContainerView.swift */,
+				D586D0B428FB465A004D2C7D /* HomeContainerView+TableDelegate.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -359,6 +374,7 @@
 			children = (
 				D586D05B28F7C05D004D2C7D /* Cells */,
 				D586D05928F7B62B004D2C7D /* SearchContainerView.swift */,
+				D586D0B228FB4626004D2C7D /* SearchContainerView+TableDelegate.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -397,6 +413,7 @@
 			children = (
 				D586D06528F84784004D2C7D /* Cells */,
 				D586D06328F83C86004D2C7D /* HeroDescribtionContainerView.swift */,
+				D586D0B028FB45C7004D2C7D /* HeroDescriptionContainerView+TableDelegate.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -414,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				D586D06B28F85DD3004D2C7D /* DynamicTableView.swift */,
+				D586D0BF28FB5D5E004D2C7D /* Thread.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -549,6 +567,22 @@
 				D586D0AE28FADF76004D2C7D /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D586D0B628FB4791004D2C7D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				D586D0B728FB47A2004D2C7D /* SplashCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D586D0B928FB47DC004D2C7D /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				D586D0BA28FB47EB004D2C7D /* SplashFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -792,24 +826,30 @@
 				D586D07F28F9B046004D2C7D /* HomeManager.swift in Sources */,
 				D586D0AD28FADF4E004D2C7D /* HeroShowsModel.swift in Sources */,
 				D586D0AB28FADED1004D2C7D /* SearchManager.swift in Sources */,
+				D586D0BB28FB47EB004D2C7D /* SplashFactory.swift in Sources */,
 				D586D04B28F79E41004D2C7D /* HomeViewController.swift in Sources */,
 				D586D07428F87452004D2C7D /* Disposable.swift in Sources */,
 				D586D08E28FA4F1D004D2C7D /* Networking.swift in Sources */,
 				D586D0AF28FADF76004D2C7D /* SearchViewModel.swift in Sources */,
 				D586D07C28F9AF90004D2C7D /* HomeFactory.swift in Sources */,
 				D586D08328F9C936004D2C7D /* DependencyManager.swift in Sources */,
+				D586D0B828FB47A2004D2C7D /* SplashCoordinator.swift in Sources */,
 				D586D06E28F86EBB004D2C7D /* Observer.swift in Sources */,
 				D586D07928F9AE81004D2C7D /* HomeViewModel.swift in Sources */,
 				D586D08928F9CB46004D2C7D /* HomeCoordinator.swift in Sources */,
 				D586D06928F849B9004D2C7D /* ShowCollectionViewCell.swift in Sources */,
+				D586D0B128FB45C7004D2C7D /* HeroDescriptionContainerView+TableDelegate.swift in Sources */,
 				D586D08628F9CAA3004D2C7D /* Coordinator.swift in Sources */,
 				D586D04428F79746004D2C7D /* SplashViewController.swift in Sources */,
 				D586D0A728FADDA8004D2C7D /* SearchCoordinator.swift in Sources */,
+				D586D0C028FB5D5E004D2C7D /* Thread.swift in Sources */,
 				D586D0A128FA5CB3004D2C7D /* HeroDescriptionViewModel.swift in Sources */,
+				D586D0B328FB4626004D2C7D /* SearchContainerView+TableDelegate.swift in Sources */,
 				D586D06C28F85DD3004D2C7D /* DynamicTableView.swift in Sources */,
 				D586D06128F83C44004D2C7D /* HeroDescribtionViewController.swift in Sources */,
 				D586D09828FA5681004D2C7D /* HeroDescriptionCoordinator.swift in Sources */,
 				D586D06728F84796004D2C7D /* HeroShowsTableViewCell.swift in Sources */,
+				D586D0B528FB465A004D2C7D /* HomeContainerView+TableDelegate.swift in Sources */,
 				D586D06428F83C86004D2C7D /* HeroDescribtionContainerView.swift in Sources */,
 				D586D05A28F7B62B004D2C7D /* SearchContainerView.swift in Sources */,
 				D586D05D28F7C07D004D2C7D /* SearchHerosTableViewCell.swift in Sources */,

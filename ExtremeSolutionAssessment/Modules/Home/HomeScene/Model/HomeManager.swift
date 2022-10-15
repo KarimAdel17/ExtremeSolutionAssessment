@@ -10,7 +10,6 @@ import Foundation
 protocol HomeManagerProtocol {
     @discardableResult
     func heros(_ observer: @escaping Observer<DataClass>, offset: Int) -> Disposable
-    func fetchHeros(offset: Int)
 }
 
 struct HomeManager {
@@ -43,10 +42,5 @@ extension HomeManager: HomeManagerProtocol {
                     observer(.failure(error))
                 }
             })
-    }
-
-    public func fetchHeros(offset: Int) {
-        print(offset)
-        networkManager.execute(.getHeros(offset: offset))
     }
 }

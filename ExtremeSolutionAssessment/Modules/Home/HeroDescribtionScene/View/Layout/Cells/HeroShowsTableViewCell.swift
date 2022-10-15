@@ -9,18 +9,12 @@ import UIKit
 
 class HeroShowsTableViewCell: UITableViewCell {
 
-    var shows: [ComicsItem]? {
-        didSet {
-            showCollectionView.reloadData()
-        }
-    }
+    var shows = [ItemsData]()
     
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = #colorLiteral(red: 0.1764706075, green: 0.1764706075, blue: 0.1764706075, alpha: 1)
         view.backgroundColor = .clear
-//        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -35,10 +29,8 @@ class HeroShowsTableViewCell: UITableViewCell {
     
     lazy var showCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        let size = (UIScreen.main.bounds.width - CGFloat(30))
         layout.itemSize = CGSize(width: 65, height: 120)
         collectionView.setCollectionViewLayout(layout, animated: true)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,10 +95,8 @@ class HeroShowsTableViewCell: UITableViewCell {
     
     private func setupShowKind() {
         NSLayoutConstraint.activate([
-//            showKind.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor),
             showKind.topAnchor.constraint(equalTo: containerView.topAnchor),
             showKind.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor)
-//            showKind.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -20),
         ])
     }
     
@@ -122,8 +112,7 @@ class HeroShowsTableViewCell: UITableViewCell {
 
 extension HeroShowsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(shows?.count)
-        return shows?.count ?? 0
+        return shows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -131,17 +120,15 @@ extension HeroShowsTableViewCell: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
         
-        cell.comicName.text = shows?[indexPath.row].name
-//        if let path = shows.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
-//            let allPath = path + "." + imageExtension
-//            if let url = URL(string: allPath) {
-//                cell.comicImage.kf.indicatorType = .activity
-//                cell.comicImage.kf.setImage(with: url)
-//            }
-//        }
+        cell.comicName.text = shows[indexPath.row].title
+        if let path = shows[indexPath.row].thumbnail?.path, let imageExtension = shows[indexPath.row].thumbnail?.thumbnailExtension {
+            let allPath = path + "." + imageExtension
+            if let url = URL(string: allPath) {
+                cell.comicImage.kf.indicatorType = .activity
+                cell.comicImage.kf.setImage(with: url)
+            }
+        }
         
-//        cell.heroImage.image = UIImage(named: "mcu-background")
-//        cell.heroName.text = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
         return cell
     }
     

@@ -123,57 +123,19 @@ class HomeContainerView: UIView {
     }
     
     func bind(_ hero: HerosData, with cell: HerosTableViewCell) -> HerosTableViewCell {
-//        cell.apply {
-        
-        cell.heroName.text = hero.name
-        
-        if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
-            let allPath = path + "." + imageExtension
-            if let url = URL(string: allPath) {
-                cell.heroImage.kf.indicatorType = .activity
-                cell.heroImage.kf.setImage(with: url)
+        cell.apply {_ in
+            
+            cell.heroName.text = hero.name
+            
+            if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
+                let allPath = path + "." + imageExtension
+                if let url = URL(string: allPath) {
+                    cell.heroImage.kf.indicatorType = .activity
+                    cell.heroImage.kf.setImage(with: url)
+                }
             }
         }
         return cell
-    }
-}
-
-extension HomeContainerView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getHerosCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(HerosTableViewCell.self), for: indexPath) as? HerosTableViewCell else {
-            return HerosTableViewCell()
-        }
-
-        guard indexPath.row < viewModel.getHerosCount() else {
-            return cell
-        }
-
-        let hero = viewModel.getHero(index: indexPath.row)
-        return bind(hero, with: cell)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        delegate?.HomeViewController(self, didSelectHero: viewModel.getHero(index: indexPath.row))
-        
-        onTapCell?(indexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         200
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (viewModel.getHerosCount() - 3) {
-            if viewModel.getTotal() > viewModel.getCurrent() {
-                Pagination?()
-//                viewModel.refresh()
-            }
-        }
     }
 }
 

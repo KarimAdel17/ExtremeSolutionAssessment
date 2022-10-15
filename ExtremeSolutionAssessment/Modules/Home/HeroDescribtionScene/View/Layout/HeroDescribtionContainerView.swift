@@ -11,20 +11,7 @@ import UIKit
 class HeroDescribtionContainerView: UIView {
     
     let viewModel: HeroDescriptionViewModel!
-    
-    lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .clear
-        return scrollView
-    }()
-    
-    lazy var scrollContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+    let disposeBag = DisposeBag()
     
     lazy var backView: UIView = {
         let view = UIView()
@@ -50,7 +37,26 @@ class HeroDescribtionContainerView: UIView {
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
         image.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        image.image = #imageLiteral(resourceName: "mcu-background")
+        return image
+    }()
+    
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .clear
+        return scrollView
+    }()
+    
+    lazy var scrollContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    lazy var backgroundImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -128,6 +134,7 @@ class HeroDescribtionContainerView: UIView {
         setupHeroImage()
         setupBackView()
         setupBackBTN()
+        setupBackgroundImage()
         setupBlur()
         setupScroll()
         setupScrollContainerView()
@@ -138,19 +145,22 @@ class HeroDescribtionContainerView: UIView {
     
     private func addSubViews() {
         
+        addSubview(backgroundImage)
         addSubview(blur)
+        addSubview(scrollView)
         addSubview(heroImage)
         addSubview(backView)
-        addSubview(scrollView)
-
+        
         backView.addSubview(backBTN)
         
+//        scrollView.addSubview(backgroundImage)
+//        scrollView.addSubview(blur)
         scrollView.addSubview(scrollContainerView)
         
         scrollContainerView.addSubview(heroName)
         scrollContainerView.addSubview(descriptionStack)
         scrollContainerView.addSubview(heroShowsTableView)
-
+        
         descriptionStack.addArrangedSubview(descriptionLabel)
         descriptionStack.addArrangedSubview(desc)
     }
@@ -184,22 +194,23 @@ class HeroDescribtionContainerView: UIView {
     
     private func setupBlur() {
         NSLayoutConstraint.activate([
-            blur.topAnchor.constraint(equalTo: self.topAnchor),
+            blur.topAnchor.constraint(equalTo: heroImage.bottomAnchor, constant: -20),
             blur.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             blur.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+//            blur.heightAnchor.constraint(equalToConstant: ((UIScreen.main.preferredMode?.size.height)!) - 200)
             blur.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     
     private func setupScroll() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: heroImage.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: heroImage.bottomAnchor, constant: -15),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
-
+    
     private func setupScrollContainerView() {
         NSLayoutConstraint.activate([
             scrollContainerView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -211,9 +222,20 @@ class HeroDescribtionContainerView: UIView {
         ])
     }
     
+    private func setupBackgroundImage() {
+        NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: heroImage.bottomAnchor, constant: -20),
+            backgroundImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+//            backgroundImage.heightAnchor.constraint(equalToConstant: ((UIScreen.main.preferredMode?.size.height)!) - 200),
+//            backgroundImage.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        ])
+    }
+    
     private func setupHeroName() {
         NSLayoutConstraint.activate([
-            heroName.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: 20),
+            heroName.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: 35),
             heroName.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: 15),
             heroName.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor, constant: -15)
         ])
@@ -235,7 +257,7 @@ class HeroDescribtionContainerView: UIView {
             heroShowsTableView.bottomAnchor.constraint(equalTo: scrollContainerView.bottomAnchor),
         ])
     }
-
+    
     var onTapBackBTN: (() -> Void)?
     
     @objc func didTappedBackBTN() {
@@ -243,40 +265,26 @@ class HeroDescribtionContainerView: UIView {
     }
     
     func bind(_ show: HeroShows, with cell: HeroShowsTableViewCell) -> HeroShowsTableViewCell {
-//        cell.apply {
-        
-        cell.showKind.text = show.showKind
-        cell.shows = show.show
-        
+        cell.apply { [weak self] _ in
+            guard let self = self else { return }
+            cell.showKind.text = show.showKind
+            
+            DispatchQueue.global().async {
+                self.viewModel.items({ [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success:
+                        cell.shows = self.viewModel.getItems()
+                        self.apply(onMainThread: true) {_ in
+                            cell.showCollectionView.reloadData()
+                        }
+                    case let .failure(error):
+                        print(error)
+                    }
+                }, url: show.show?.collectionURI ?? "").disposed(by: self.disposeBag)
+                
+            }
+        }
         return cell
-    }
-}
-
-
-extension HeroDescribtionContainerView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getShowsCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(HeroShowsTableViewCell.self), for: indexPath) as? HeroShowsTableViewCell else {
-            return HeroShowsTableViewCell()
-        }
-        
-        guard indexPath.row < viewModel.getShowsCount() else {
-            return cell
-        }
-
-        let show = viewModel.getShow(index: indexPath.row)
-        return bind(show, with: cell)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        onTapRow?()
-//        presenter.navigateToNextScene(at: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         170
     }
 }

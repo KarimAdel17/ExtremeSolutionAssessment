@@ -33,7 +33,6 @@ class HeroDescribtionViewController: UIViewController {
 
             case let .failure(error):
                 print(error)
-//                self?.present(error)
             }
         }
         
@@ -62,6 +61,8 @@ extension HeroDescribtionViewController {
             if let url = URL(string: allPath) {
                 self.containerView.heroImage.kf.indicatorType = .activity
                 self.containerView.heroImage.kf.setImage(with: url)
+                self.containerView.backgroundImage.kf.indicatorType = .activity
+                self.containerView.backgroundImage.kf.setImage(with: url)
             }
         }
         self.containerView.heroName.text = hero.name
