@@ -10,6 +10,8 @@ import UIKit
 
 class HeroDescribtionContainerView: UIView {
     
+    let viewModel: HeroDescriptionViewModel!
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +40,7 @@ class HeroDescribtionContainerView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         button.setImage(UIImage(named: "ic-back"), for: .normal)
+        button.addTarget(self, action: #selector(didTappedBackBTN), for: .touchUpInside)
         return button
     }()
     
@@ -64,7 +67,6 @@ class HeroDescribtionContainerView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.text = "iron man"
         return label
     }()
     
@@ -84,6 +86,7 @@ class HeroDescribtionContainerView: UIView {
         label.textColor = #colorLiteral(red: 1, green: 0.551985085, blue: 0.5694903135, alpha: 1)
         label.font = UIFont.boldSystemFont(ofSize: 10)
         label.text = "Description"
+        label.isHidden = true
         return label
     }()
     
@@ -93,7 +96,7 @@ class HeroDescribtionContainerView: UIView {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 10)
         label.numberOfLines = 0
-        label.text = "jkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhdjkahkljasldjgasjhd"
+        label.isHidden = true
         return label
     }()
     
@@ -110,7 +113,8 @@ class HeroDescribtionContainerView: UIView {
         return tableView
     }()
     
-    init() {
+    init(viewModel: HeroDescriptionViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         layoutUserInterface()
     }
@@ -232,20 +236,39 @@ class HeroDescribtionContainerView: UIView {
         ])
     }
 
+    var onTapBackBTN: (() -> Void)?
     
+    @objc func didTappedBackBTN() {
+        onTapBackBTN?()
+    }
+    
+    func bind(_ show: HeroShows, with cell: HeroShowsTableViewCell) -> HeroShowsTableViewCell {
+//        cell.apply {
+        
+        cell.showKind.text = show.showKind
+        cell.shows = show.show
+        
+        return cell
+    }
 }
 
 
 extension HeroDescribtionContainerView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        viewModel.getShowsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(HeroShowsTableViewCell.self), for: indexPath) as? HeroShowsTableViewCell else {
-            return UITableViewCell()
+            return HeroShowsTableViewCell()
         }
-        return cell
+        
+        guard indexPath.row < viewModel.getShowsCount() else {
+            return cell
+        }
+
+        let show = viewModel.getShow(index: indexPath.row)
+        return bind(show, with: cell)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -254,6 +277,6 @@ extension HeroDescribtionContainerView: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         150
+         170
     }
 }

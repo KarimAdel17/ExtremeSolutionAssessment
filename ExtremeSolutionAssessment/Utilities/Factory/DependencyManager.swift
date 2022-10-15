@@ -23,3 +23,19 @@ extension DependencyManager: HomeFactory {
         return viewController
     }
 }
+
+extension DependencyManager: HeroDescriptionFactory {
+    
+    func makeHeroDescriptionManager(for hero: HerosData) -> HeroDescriptionManagerProtocol {
+        HeroDescriptionManager(hero: hero)
+    }
+    
+    func makeHeroDescriptionViewController(for hero: HerosData) -> HeroDescribtionViewController {
+        let viewController = HeroDescribtionViewController()
+        viewController.viewModel = HeroDescriptionViewModel(factory: self, hero: hero)
+        
+        return viewController
+    }
+    
+    
+}

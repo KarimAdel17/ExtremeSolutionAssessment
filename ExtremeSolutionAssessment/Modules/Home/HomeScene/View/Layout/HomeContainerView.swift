@@ -129,36 +129,11 @@ class HomeContainerView: UIView {
         
         if let path = hero.thumbnail?.path, let imageExtension = hero.thumbnail?.thumbnailExtension {
             let allPath = path + "." + imageExtension
-            print(allPath)
             if let url = URL(string: allPath) {
-                print(url)
                 cell.heroImage.kf.indicatorType = .activity
                 cell.heroImage.kf.setImage(with: url)
             }
         }
-        //        }
-
-//        guard let url = story.imageUrl(.small) else {
-//            cell.multimediaImageView.isHidden = true
-//            return cell
-//        }
-//
-//        viewModel
-//            .image(with: url) { result in
-//                switch result {
-//                case let .success(image):
-//                    cell.apply(onMainThread: true) {
-//                        $0.multimediaImageView.image = image
-//                        $0.multimediaImageView.isHidden = false
-//                    }
-//
-//                case .failure:
-//                    cell.apply(onMainThread: true) {
-//                        $0.multimediaImageView.isHidden = true
-//                    }
-//                }
-//            }?.disposed(by: disposeBag)
-
         return cell
     }
 }
