@@ -10,10 +10,30 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var coordinator: CoordinatorProtocol!
+    
+    func application(
+        _: UIApplication,
+        willFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+//        if let animationStub = ProcessInfo.processInfo.decode(AnimationStub.self) {
+//            UIView.setAnimationsEnabled(animationStub.areAnimationsEnabled)
+//        }
 
+//        let session: URLSessionProtocol = ProcessInfo.processInfo.decode(URLSessionMock.self) ?? URLSession(configuration: .default)
+//        let networkManager = NetworkManager()
+////        let networkManager = NetworkManager(session: session)
+//        let factory = DependencyManager(networkManager: networkManager)
+//        let window = UIWindow(frame: UIScreen.main.bounds)
+//
+//        coordinator = Coordinator(factory: factory, window: window)
+
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        coordinator.start()
         return true
     }
 

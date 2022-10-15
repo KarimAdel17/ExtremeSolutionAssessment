@@ -29,6 +29,18 @@
 		D586D06728F84796004D2C7D /* HeroShowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D06628F84796004D2C7D /* HeroShowsTableViewCell.swift */; };
 		D586D06928F849B9004D2C7D /* ShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D06828F849B9004D2C7D /* ShowCollectionViewCell.swift */; };
 		D586D06C28F85DD3004D2C7D /* DynamicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D06B28F85DD3004D2C7D /* DynamicTableView.swift */; };
+		D586D06E28F86EBB004D2C7D /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D06D28F86EBB004D2C7D /* Observer.swift */; };
+		D586D07228F871D0004D2C7D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D07128F871D0004D2C7D /* NetworkManager.swift */; };
+		D586D07428F87452004D2C7D /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D07328F87452004D2C7D /* Disposable.swift */; };
+		D586D07628F87492004D2C7D /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D07528F87492004D2C7D /* DisposeBag.swift */; };
+		D586D07928F9AE81004D2C7D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D07828F9AE81004D2C7D /* HomeViewModel.swift */; };
+		D586D07C28F9AF90004D2C7D /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D07B28F9AF90004D2C7D /* HomeFactory.swift */; };
+		D586D07F28F9B046004D2C7D /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D07E28F9B046004D2C7D /* HomeManager.swift */; };
+		D586D08328F9C936004D2C7D /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D08228F9C936004D2C7D /* DependencyManager.swift */; };
+		D586D08628F9CAA3004D2C7D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D08528F9CAA3004D2C7D /* Coordinator.swift */; };
+		D586D08928F9CB46004D2C7D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D08828F9CB46004D2C7D /* HomeCoordinator.swift */; };
+		D586D08B28FA4E39004D2C7D /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D08A28FA4E39004D2C7D /* HomeModel.swift */; };
+		D586D08E28FA4F1D004D2C7D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D586D08D28FA4F1D004D2C7D /* Networking.swift */; };
 		F48182A696B745171CAD68F1 /* Pods_ExtremeSolutionAssessmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790E312ACBC93D2C2F8387B1 /* Pods_ExtremeSolutionAssessmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +94,18 @@
 		D586D06628F84796004D2C7D /* HeroShowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroShowsTableViewCell.swift; sourceTree = "<group>"; };
 		D586D06828F849B9004D2C7D /* ShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCollectionViewCell.swift; sourceTree = "<group>"; };
 		D586D06B28F85DD3004D2C7D /* DynamicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTableView.swift; sourceTree = "<group>"; };
+		D586D06D28F86EBB004D2C7D /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		D586D07128F871D0004D2C7D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D586D07328F87452004D2C7D /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		D586D07528F87492004D2C7D /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
+		D586D07828F9AE81004D2C7D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D586D07B28F9AF90004D2C7D /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
+		D586D07E28F9B046004D2C7D /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
+		D586D08228F9C936004D2C7D /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
+		D586D08528F9CAA3004D2C7D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		D586D08828F9CB46004D2C7D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		D586D08A28FA4E39004D2C7D /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		D586D08D28FA4F1D004D2C7D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		EB210FC3873FA95A1FE25666 /* Pods-ExtremeSolutionAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExtremeSolutionAssessment.debug.xcconfig"; path = "Target Support Files/Pods-ExtremeSolutionAssessment/Pods-ExtremeSolutionAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +233,10 @@
 		D586D03E28F79552004D2C7D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D586D08F28FA4FD5004D2C7D /* Observer */,
+				D586D08428F9CA91004D2C7D /* Coordinator */,
+				D586D07A28F9AF4A004D2C7D /* Factory */,
+				D586D07028F871BF004D2C7D /* Server */,
 				D586D06A28F85DB2004D2C7D /* Classes */,
 			);
 			path = Utilities;
@@ -252,7 +280,11 @@
 		D586D04828F79E06004D2C7D /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				D586D09028FA5001004D2C7D /* Factory */,
+				D586D08728F9CB31004D2C7D /* Coordinator */,
+				D586D07D28F9B030004D2C7D /* Model */,
 				D586D04928F79E30004D2C7D /* View */,
+				D586D07728F9AE70004D2C7D /* ViewModel */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -358,6 +390,74 @@
 				D586D06B28F85DD3004D2C7D /* DynamicTableView.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		D586D07028F871BF004D2C7D /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				D586D07128F871D0004D2C7D /* NetworkManager.swift */,
+				D586D08D28FA4F1D004D2C7D /* Networking.swift */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		D586D07728F9AE70004D2C7D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D586D07828F9AE81004D2C7D /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D586D07A28F9AF4A004D2C7D /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				D586D08228F9C936004D2C7D /* DependencyManager.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		D586D07D28F9B030004D2C7D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D586D07E28F9B046004D2C7D /* HomeManager.swift */,
+				D586D08A28FA4E39004D2C7D /* HomeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D586D08428F9CA91004D2C7D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				D586D08528F9CAA3004D2C7D /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D586D08728F9CB31004D2C7D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				D586D08828F9CB46004D2C7D /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D586D08F28FA4FD5004D2C7D /* Observer */ = {
+			isa = PBXGroup;
+			children = (
+				D586D06D28F86EBB004D2C7D /* Observer.swift */,
+				D586D07328F87452004D2C7D /* Disposable.swift */,
+				D586D07528F87492004D2C7D /* DisposeBag.swift */,
+			);
+			path = Observer;
+			sourceTree = "<group>";
+		};
+		D586D09028FA5001004D2C7D /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				D586D07B28F9AF90004D2C7D /* HomeFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -598,8 +698,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D586D07F28F9B046004D2C7D /* HomeManager.swift in Sources */,
 				D586D04B28F79E41004D2C7D /* HomeViewController.swift in Sources */,
+				D586D07428F87452004D2C7D /* Disposable.swift in Sources */,
+				D586D08E28FA4F1D004D2C7D /* Networking.swift in Sources */,
+				D586D07C28F9AF90004D2C7D /* HomeFactory.swift in Sources */,
+				D586D08328F9C936004D2C7D /* DependencyManager.swift in Sources */,
+				D586D06E28F86EBB004D2C7D /* Observer.swift in Sources */,
+				D586D07928F9AE81004D2C7D /* HomeViewModel.swift in Sources */,
+				D586D08928F9CB46004D2C7D /* HomeCoordinator.swift in Sources */,
 				D586D06928F849B9004D2C7D /* ShowCollectionViewCell.swift in Sources */,
+				D586D08628F9CAA3004D2C7D /* Coordinator.swift in Sources */,
 				D586D04428F79746004D2C7D /* SplashViewController.swift in Sources */,
 				D586D06C28F85DD3004D2C7D /* DynamicTableView.swift in Sources */,
 				D586D06128F83C44004D2C7D /* HeroDescribtionViewController.swift in Sources */,
@@ -607,11 +716,14 @@
 				D586D06428F83C86004D2C7D /* HeroDescribtionContainerView.swift in Sources */,
 				D586D05A28F7B62B004D2C7D /* SearchContainerView.swift in Sources */,
 				D586D05D28F7C07D004D2C7D /* SearchHerosTableViewCell.swift in Sources */,
+				D586D07228F871D0004D2C7D /* NetworkManager.swift in Sources */,
 				D586D05728F7B5F6004D2C7D /* SearchViewController.swift in Sources */,
 				D586D04728F7979B004D2C7D /* SplashContainerView.swift in Sources */,
 				D586D00D28F715BE004D2C7D /* AppDelegate.swift in Sources */,
 				D586D00F28F715BE004D2C7D /* SceneDelegate.swift in Sources */,
+				D586D08B28FA4E39004D2C7D /* HomeModel.swift in Sources */,
 				D586D04E28F79EC2004D2C7D /* HomeContainerView.swift in Sources */,
+				D586D07628F87492004D2C7D /* DisposeBag.swift in Sources */,
 				D586D05128F7A652004D2C7D /* HerosTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
