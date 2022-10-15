@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 protocol HomeCoordinatorDelegate: AnyObject {
-    func HomeCoordinator(_ HomeCoordinator: HomeCoordinator, didOpenHero hero: HerosData)
+    func homeCoordinator(_ HomeCoordinator: HomeCoordinator, didOpenHero hero: HerosData)
+    func homeCoordinator(_ HomeCoordinator: HomeCoordinator)
 }
 
 protocol HomeCoordinatorProtocol: AnyObject {
@@ -38,7 +39,11 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
 }
 
 extension HomeCoordinator: HomeViewControllerDelegate {
-    func HomeViewController(_: HomeViewController, didSelectHero hero: HerosData) {
-        delegate?.HomeCoordinator(self, didOpenHero: hero)
+    func homeViewController(_: HomeViewController, didSelectHero hero: HerosData) {
+        delegate?.homeCoordinator(self, didOpenHero: hero)
+    }
+    
+    func homeViewController(_ HomeViewController: HomeViewController) {
+        delegate?.homeCoordinator(self)
     }
 }

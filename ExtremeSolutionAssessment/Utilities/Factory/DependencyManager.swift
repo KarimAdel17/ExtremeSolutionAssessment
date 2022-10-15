@@ -36,6 +36,17 @@ extension DependencyManager: HeroDescriptionFactory {
         
         return viewController
     }
+}
+
+extension DependencyManager: SearchFactory {
+    func makeSearchManager() -> SearchManagerProtocol {
+        SearchManager(networkManager: networkManager)
+    }
     
-    
+    func makeSearchViewController() -> SearchViewController {
+        let viewController = SearchViewController()
+        viewController.viewModel = SearchViewModel(factory: self)
+
+        return viewController
+    }
 }

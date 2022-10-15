@@ -9,7 +9,8 @@ import UIKit
 import Kingfisher
 
 protocol HomeViewControllerDelegate: AnyObject {
-    func HomeViewController(_ HomeViewController: HomeViewController, didSelectHero hero: HerosData)
+    func homeViewController(_ HomeViewController: HomeViewController, didSelectHero hero: HerosData)
+    func homeViewController(_ HomeViewController: HomeViewController)
 }
 
 class HomeViewController: UIViewController {
@@ -37,15 +38,13 @@ class HomeViewController: UIViewController {
         }
         
         containerView.onTapSearch = { [weak self] in
-            let vc = SearchViewController()
-            vc.modalPresentationStyle = .overFullScreen
-//            self.navigationController?.pushViewController(vc, animated: true)
-            self?.present(vc, animated: true)
+            guard let self = self else { return }
+            self.delegate?.homeViewController(self)
         }
         
         containerView.onTapCell = { [weak self] index in
             guard let self = self else { return }
-            self.delegate?.HomeViewController(self, didSelectHero: self.viewModel.getHero(index: index))
+            self.delegate?.homeViewController(self, didSelectHero: self.viewModel.getHero(index: index))
         }
         
         // Do any additional setup after loading the view.

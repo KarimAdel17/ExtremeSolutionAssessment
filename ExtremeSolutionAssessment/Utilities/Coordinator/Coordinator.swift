@@ -12,10 +12,12 @@ protocol CoordinatorProtocol: AnyObject {
     func start()
     func navigateTo(_ hero: HerosData)
     func popViewController()
+    func presentSearch()
+    func dismissSearch()
 }
 
 final class Coordinator {
-    typealias Factory = HomeFactory & HeroDescriptionFactory
+    typealias Factory = HomeFactory & HeroDescriptionFactory & SearchFactory
 
     var homeCoordinator: HomeCoordinatorProtocol {
         didSet {
@@ -28,6 +30,12 @@ final class Coordinator {
             heroDescriptionCoordinator.delegate = self
         }
     }
+    
+    var searchCoordinator: SearchCoordinatorProtocol {
+        didSet {
+            searchCoordinator.delegate = self
+        }
+    }
 
     let navigationController = UINavigationController()
 
@@ -36,6 +44,7 @@ final class Coordinator {
     init(factory: Factory, window: UIWindow) {
         homeCoordinator = ExtremeSolutionAssessment.HomeCoordinator(factory: factory)
         heroDescriptionCoordinator = ExtremeSolutionAssessment.HeroDescriptionCoordinator(factory: factory)
+        searchCoordinator = ExtremeSolutionAssessment.SearchCoordinator(factory: factory)
 
         self.window = window
         navigationController.isNavigationBarHidden = true
@@ -44,6 +53,7 @@ final class Coordinator {
 
         homeCoordinator.delegate = self
         heroDescriptionCoordinator.delegate = self
+        searchCoordinator.delegate = self
     }
 }
 
@@ -61,16 +71,41 @@ extension Coordinator: CoordinatorProtocol {
     func popViewController() {
         navigationController.popViewController(animated: true)
     }
+    
+    func presentSearch() {
+        let viewController = searchCoordinator.start()
+        viewController.modalPresentationStyle = .overFullScreen
+        navigationController.present(viewController, animated: true)
+    }
+    
+    func dismissSearch() {
+        navigationController.dismiss(animated: true)
+    }
 }
 
 extension Coordinator: HomeCoordinatorDelegate {
-    func HomeCoordinator(_: HomeCoordinator, didOpenHero hero: HerosData) {
+    func homeCoordinator(_: HomeCoordinator, didOpenHero hero: HerosData) {
         navigateTo(hero)
+    }
+    
+    func homeCoordinator(_ HomeCoordinator: HomeCoordinator) {
+        presentSearch()
     }
 }
     
 extension Coordinator: HeroDescriptionCoordinatorDelegate {
-    func HeroDescriptionCoordinator(_ HeroDescriptionCoordinator: HeroDescriptionCoordinator) {
+    func heroDescriptionCoordinator(_ HeroDescriptionCoordinator: HeroDescriptionCoordinator) {
         popViewController()
+    }
+}
+
+extension Coordinator: SearchCoordinatorDelegate {
+    func searchCoordinator(_ SearchCoordinator: SearchCoordinator, didOpenHero hero: HerosData) {
+        dismissSearch()
+        navigateTo(hero)
+    }
+    
+    func searchCoordinator(_ SearchCoordinator: SearchCoordinator) {
+        dismissSearch()
     }
 }

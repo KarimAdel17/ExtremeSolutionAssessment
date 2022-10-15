@@ -8,7 +8,6 @@
 import UIKit
 
 protocol HeroDescriptionViewControllerDelegate: AnyObject {
-//    func HeroDescribtionViewController(_ HeroDescribtionViewController: HomeViewController, didSelectHero hero: HerosData)
     func popHeroDescriptionViewController()
 }
 
